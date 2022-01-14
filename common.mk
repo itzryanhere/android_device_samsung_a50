@@ -24,7 +24,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl:32 \
     android.hardware.audio@7.0-impl:32 \
     android.hardware.audio.service \
-    android.hardware.bluetooth.audio@2.0-impl:32 \
+    android.hardware.bluetooth.audio-impl \
     android.hardware.soundtrigger@2.0-impl:32 \
     audio.bluetooth.default \
     audio.r_submix.default \
@@ -45,6 +45,10 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(COMMON_PATH)/configs/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(COMMON_PATH)/configs/audio/mixer_gains.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_gains.xml
+
+# DAP
+PRODUCT_PACKAGES += \
+    SamsungDAP
 
 # Biometric Fingerprint
 PRODUCT_PACKAGES += \
@@ -70,15 +74,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     disable_configstore
 
-# DAP
-PRODUCT_PACKAGES += \
-    SamsungDAP
-
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.4-service \
+    android.hardware.graphics.composer@2.2-service \
     android.hardware.graphics.mapper@2.0-impl-2.1
 
 # DRM
@@ -97,7 +97,7 @@ PRODUCT_PACKAGES += \
 
 # GPS/GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.1.vendor:64
+    android.hardware.gnss@2.0.vendor:64
 
 # Graphics
 # Device uses high-density artwork where available
@@ -221,6 +221,7 @@ PRODUCT_SOONG_NAMESPACES += \
     $(COMMON_PATH) \
     hardware/google/interfaces \
     hardware/google/pixel \
+    hardware/samsung \
     hardware/samsung/aidl/power-libperfmgr
 
 # Thermal
@@ -237,6 +238,11 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb-service.samsung
+
+
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light-service.samsung
 
 # VNDK
 PRODUCT_PACKAGES += \

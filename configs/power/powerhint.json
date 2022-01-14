@@ -45,6 +45,36 @@
             ],
             "DefaultIndex": 0,
             "ResetOnInit": false
+        },
+        {
+            "Name": "PowerHALMainState",
+            "Path": "vendor.powerhal.state",
+            "Values": [
+                "CAMERA_STREAMING_MID",
+                "SUSTAINED_PERFORMANCE",
+                "VR_MODE",
+                "VR_SUSTAINED_PERFORMANCE",
+                ""
+            ],
+            "Type": "Property"
+        },
+        {
+            "Name": "PowerHALAudioState",
+            "Path": "vendor.powerhal.audio",
+            "Values": [
+                "AUDIO_STREAMING_LOW_LATENCY",
+                ""
+            ],
+            "Type": "Property"
+        },
+        {
+            "Name": "PowerHALRenderingState",
+            "Path": "vendor.powerhal.rendering",
+            "Values": [
+                "EXPENSIVE_RENDERING",
+                ""
+            ],
+            "Type": "Property"
         }
     ],
     "Actions": [
@@ -101,6 +131,10 @@
             "Node": "DoubleTapToWakeEnable",
             "Duration": 0,
             "Value": "aot_enable,1"
+<<<<<<< HEAD
         },
+=======
+        }
+>>>>>>> 8923f7c (gta4xl-common: remove lineage perf profiles from powerhint)
     ]
 }
