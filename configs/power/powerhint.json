@@ -45,36 +45,6 @@
             ],
             "DefaultIndex": 0,
             "ResetOnInit": false
-        },
-        {
-            "Name": "PowerHALMainState",
-            "Path": "vendor.powerhal.state",
-            "Values": [
-                "CAMERA_STREAMING_MID",
-                "SUSTAINED_PERFORMANCE",
-                "VR_MODE",
-                "VR_SUSTAINED_PERFORMANCE",
-                ""
-            ],
-            "Type": "Property"
-        },
-        {
-            "Name": "PowerHALAudioState",
-            "Path": "vendor.powerhal.audio",
-            "Values": [
-                "AUDIO_STREAMING_LOW_LATENCY",
-                ""
-            ],
-            "Type": "Property"
-        },
-        {
-            "Name": "PowerHALRenderingState",
-            "Path": "vendor.powerhal.rendering",
-            "Values": [
-                "EXPENSIVE_RENDERING",
-                ""
-            ],
-            "Type": "Property"
         }
     ],
     "Actions": [
