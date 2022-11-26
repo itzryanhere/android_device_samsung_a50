@@ -27,7 +27,7 @@
 #include <dlfcn.h>
 #include <inttypes.h>
 #include <unistd.h>
-#include <thread>
+#include <cutils/properties.h>
 
 #define SEH_FINGER_STATE 22
 #define SEH_PARAM_PRESSED 2
@@ -90,23 +90,13 @@ Return<bool> SehBiometricsFingerprint::isUdfps(uint32_t) {
     return mIsUdfps;
 }
 
-void SehBiometricsFingerprint::requestResult(int, const hidl_vec<int8_t>&) {
-    // Ignore all results
-}
+Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
+    property_set("vendor.finger.down", "1");
 
-static hidl_vec<int8_t> stringToVec(const std::string& str) {
-    auto vec = hidl_vec<int8_t>();
-    vec.resize(str.size() + 1);
-    for (size_t i = 0; i < str.size(); ++i) {
-        vec[i] = (int8_t) str[i];
-    }
-    vec[str.size()] = '\0';
-    return vec;
-}
-
-Return<void> SehBiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
-    mPreviousBrightness = get<std::string>(BRIGHTNESS_PATH, "");
-    set(BRIGHTNESS_PATH, "331");
+    std::thread([this]() {
+        std::this_thread::sleep_for(std::chrono::milliseconds(35));
+        set(HBM_PATH, "331");
+    }).detach();
 
     sehRequest(SEH_FINGER_STATE, SEH_PARAM_PRESSED,
         stringToVec(SEH_AOSP_FQNAME), SehBiometricsFingerprint::requestResult);

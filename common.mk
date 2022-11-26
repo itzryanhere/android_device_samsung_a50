@@ -52,6 +52,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     SamsungDAP
 
+# BiometricFingeprint
+     android.hardware.biometrics.fingerprint@2.3-service-samsung.a50 \
+     SamsungUdfpsHandler.a50
+
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl:64 \
