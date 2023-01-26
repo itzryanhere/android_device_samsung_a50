@@ -192,6 +192,18 @@ vendor/firmware/fimc_is_rta.bin
 ## RIL
 vendor/lib/libaudio-ril.so
 vendor/lib/libsecril-client.so
+vendor/lib64/libengmode_client.so
+vendor/lib64/libfloatingfeature.so
+vendor/lib64/libril_sem.so
+vendor/lib64/librilutils.so
+vendor/lib64/libsec-ril.so
+vendor/lib64/libsecnativefeature.so
+vendor/lib64/libsemnativecarrierfeature.so
+vendor/lib64/libvkmanager_vendor.so
+vendor/lib64/vendor.samsung.hardware.radio.bridge@2.0.so
+vendor/lib64/vendor.samsung.hardware.radio.channel@2.0.so
+vendor/lib64/vendor.samsung.hardware.radio@2.0.so
+vendor/lib64/vendor.samsung.hardware.radio@2.1.so
 
 ## SECNATIVE
 vendor/lib/libsecnativefeature.so
