@@ -26,7 +26,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.bluetooth.audio@2.0-impl:32 \
     android.hardware.soundtrigger@2.0-impl:32 \
-    audio.a2dp.default \
     audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
@@ -71,10 +70,6 @@ PRODUCT_PACKAGES += \
 # ConfigStore
 PRODUCT_PACKAGES += \
     disable_configstore
-
-# DAP
-PRODUCT_PACKAGES += \
-    SamsungDAP
 
 # Display
 PRODUCT_PACKAGES += \
@@ -137,14 +132,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.0-service.samsung \
     libkeymaster4_1support.vendor:64
-
-# Lights
-PRODUCT_PACKAGES += \
-    android.hardware.light-service.samsung
-
-# Livedisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service.samsung-exynos
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -218,11 +205,6 @@ PRODUCT_PACKAGES += \
     android.hardware.radio@1.4.vendor \
     android.hardware.radio.config@1.2.vendor \
     android.hardware.radio.deprecated@1.0.vendor \
-    secril_config_svc
-
-# Sensors
-PRODUCT_PACKAGES += \
-    android.hardware.sensors@2.1-service.samsung-multihal
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -235,25 +217,9 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/pixel \
     hardware/samsung/aidl/power-libperfmgr
 
-# Thermal
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.samsung
-
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/thermal/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
 
-# Touch HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.samsung
-
-# USB
-PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service.samsung
-
-# Vibrator
-PRODUCT_PACKAGES += \
-    android.hardware.vibrator-service.samsung
-    
 # WiFi
 PRODUCT_PACKAGES += \
     WifiOverlay \
