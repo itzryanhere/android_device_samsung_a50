@@ -6,6 +6,11 @@
 /data/exynos(/.*)?			     u:object_r:exynos_data_file:s0
 /data/vendor/nfc(/.*)?                       u:object_r:nfc_vendor_data_file:s0
 
+####################################
+# Block
+
+/sys/devices/platform/(.*)/block/sda/queue/discard_max_bytes                            u:object_r:sysfs_block_writable:s0
+
 ## Devices
 /dev/block/platform/.+/by-name/cpefs         u:object_r:cpefs_block_device:s0
 /dev/block/platform/.+/by-name/dtb           u:object_r:dtb_block_device:s0
@@ -30,6 +35,11 @@
 
 # Secmem
 /dev/s5p-smem                                u:object_r:secmem_device:s0
+
+####################################
+# Extcon
+
+/sys/devices/platform/(.*)/extcon/extcon0/cable.[0-9]/name                              u:object_r:sysfs_extcon:s0
 
 # ZRAM
 /dev/block/zram0                             u:object_r:swap_block_device:s0

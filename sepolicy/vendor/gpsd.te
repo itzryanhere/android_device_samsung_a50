@@ -11,6 +11,8 @@ allow gpsd gnss_device:chr_file rw_file_perms;
 
 allow gpsd gpsd_exec:file execute_no_trans;
 
+binder_call(gpsd, servicemanager)
+
 get_prop(gpsd, bootanim_system_prop);
 
 allow gpsd system_data_file:dir search;
