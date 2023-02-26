@@ -65,11 +65,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.5-service_64 \
     libsensorndkbridge \
-    GCameraGoPrebuilt
 
 # ConfigStore
 PRODUCT_PACKAGES += \
     disable_configstore
+
+# DAP
+PRODUCT_PACKAGES += \
+    SamsungDAP
 
 # Display
 PRODUCT_PACKAGES += \
@@ -94,7 +97,7 @@ PRODUCT_PACKAGES += \
 
 # GPS/GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.1.vendor
+    android.hardware.gnss@2.1.vendor:64
 
 # Graphics
 # Device uses high-density artwork where available
@@ -119,7 +122,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/init/fstab.exynos9610:$(TARGET_COPY_OUT_RAMDISK)/fstab.exynos9610 \
     $(COMMON_PATH)/configs/init/fstab.exynos9610:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.exynos9610 \
     $(COMMON_PATH)/configs/init/init.exynos9610.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.exynos9610.rc \
-    $(COMMON_PATH)/configs/init/init.exynos9610.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.exynos9610.usb.rc \
+    $(COMMON_PATH)/configs/init/init.exynos9610.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.exynos9610.wusb.rc \
     $(COMMON_PATH)/configs/init/init.recovery.exynos9610.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.exynos9610.rc \
     $(COMMON_PATH)/configs/init/init.samsung.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.samsung.rc \
     $(COMMON_PATH)/configs/init/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
@@ -133,6 +136,10 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.0-service.samsung \
     libkeymaster4_1support.vendor:64
 
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light-service.samsung
+
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
@@ -141,8 +148,7 @@ PRODUCT_COPY_FILES += \
 
 # Memtrack
 PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl:64 \
-    android.hardware.memtrack@1.0-service
+    android.hardware.memtrack-service.samsung-mali
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
@@ -202,26 +208,14 @@ PRODUCT_COPY_FILES += \
 
 # Ril
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.4.vendor:64 \
-    android.hardware.radio.config@1.2.vendor:64 \
-    android.hardware.radio.deprecated@1.0.vendor:64
+    android.hardware.radio@1.4.vendor \
+    android.hardware.radio.config@1.2.vendor \
+    android.hardware.radio.deprecated@1.0.vendor \
+    secril_config_svc
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.contexthub@1.0.vendor:64 \
     android.hardware.sensors-service.samsung-multihal
-
-# USB
-PRODUCT_PACKAGES += \
-   android.hardware.usb-service.samsung
-
-# Touch
-PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.samsung
-
-# Thermal
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.samsung
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -234,12 +228,24 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/pixel \
     hardware/samsung/aidl/power-libperfmgr
 
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@2.0-service.samsung
+
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/thermal/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
 
-# VNDK
+# Touch HAL
 PRODUCT_PACKAGES += \
-    libutils-v32
+    vendor.lineage.touch@1.0-service.samsung
+
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb-service.samsung
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator-service.samsung
 
 # WiFi
 PRODUCT_PACKAGES += \
