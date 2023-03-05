@@ -19,6 +19,8 @@ COMMON_PATH := device/samsung/a50-common
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/a50-common/a50-common-vendor.mk)
 
+OVERRIDE_TARGET_FLATTEN_APEX := true
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl:32 \
