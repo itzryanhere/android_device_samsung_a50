@@ -18,14 +18,17 @@ COMMON_PATH := device/samsung/a50-common
 
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/a50-common/a50-common-vendor.mk)
+$(call inherit-product, $(COMMON_PATH)/debug-tools/debug.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+OVERRIDE_PRODUCT_COMPRESSED_APEX := false
 
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl:32 \
-    android.hardware.audio@7.0-impl:32 \
+    android.hardware.audio@7.1-impl:32 \
     android.hardware.audio.service \
     android.hardware.bluetooth.audio-impl \
-    android.hardware.soundtrigger@2.0-impl:32 \
     audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
@@ -50,10 +53,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     SamsungDAP
 
-# Biometric Fingerprint
-PRODUCT_PACKAGES += \
-    vendor.samsung.hardware.biometrics.fingerprint@3.0-service.a50
-
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl:64 \
@@ -74,11 +73,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     disable_configstore
 
+# Charger
+PRODUCT_PACKAGES += \
+     charger_res_images_vendor
+
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.2-service \
+    android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl-2.1
 
 # DRM
@@ -97,7 +100,7 @@ PRODUCT_PACKAGES += \
 
 # GPS/GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.0.vendor:64
+    android.hardware.gnss@2.1.vendor:64
 
 # Graphics
 # Device uses high-density artwork where available
@@ -107,8 +110,8 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl:64 \
-    android.hardware.health@2.1-service
+    android.hardware.health-service.samsung \
+    android.hardware.health-service.samsung-recovery
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -125,7 +128,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/init/init.exynos9610.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.exynos9610.usb.rc \
     $(COMMON_PATH)/configs/init/init.recovery.exynos9610.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.exynos9610.rc \
     $(COMMON_PATH)/configs/init/init.samsung.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.samsung.rc \
-    $(COMMON_PATH)/configs/init/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
+    $(COMMON_PATH)/configs/init/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -210,7 +213,8 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors-service.samsung-multihal
+  android.hardware.contexthub@1.0.vendor:64 \
+  android.hardware.sensors-service.samsung-multihal
 
 # Shims
 PRODUCT_PACKAGES += \

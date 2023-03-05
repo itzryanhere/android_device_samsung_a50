@@ -115,43 +115,39 @@ vendor/lib/hw/gralloc.exynos9610.so
 vendor/lib64/hw/gralloc.exynos9610.so
 
 ## GPS
-vendor/bin/hw/vendor.samsung.hardware.gnss@2.0-service
+-vendor/bin/hw/vendor.samsung.hardware.gnss@2.0-service
 vendor/etc/init/vendor.samsung.hardware.gnss@2.0-service.rc
-vendor/lib64/vendor.samsung.hardware.gnss@2.0.so
+-vendor/lib64/vendor.samsung.hardware.gnss@2.0.so
 
 ## Graphics
-vendor/lib/egl/libGLES_mali.so
-vendor/lib/libion_exynos.so
-vendor/lib64/egl/libGLES_mali.so
-vendor/lib64/libion_exynos.so
+-vendor/lib/egl/libGLES_mali.so
+-vendor/lib/libion_exynos.so
+-vendor/lib64/egl/libGLES_mali.so
+-vendor/lib64/libion_exynos.so
 
 ## HWC
-vendor/lib64/hw/hwcomposer.exynos9610.so
-vendor/lib/libExynosHWCService.so
-vendor/lib/libGrallocWrapper.so
-vendor/lib/libexynosdisplay.so
-vendor/lib/libexynosgraphicbuffer.so
-vendor/lib/libexynosscaler.so
-vendor/lib/libexynosutils.so
-vendor/lib/libexynosv4l2.so
-vendor/lib/hw/hwcomposer.exynos9610.so
-vendor/lib64/libExynosHWCService.so
-vendor/lib64/libGrallocWrapper.so
-vendor/lib64/libacryl.so
-vendor/lib64/libacryl_plugin_slsi_hdr10.so
-vendor/lib64/libexynosdisplay.so
-vendor/lib64/libexynosgraphicbuffer.so
-vendor/lib64/libexynosscaler.so
-vendor/lib64/libexynosutils.so
-vendor/lib64/libexynosv4l2.so
+-vendor/lib64/hw/hwcomposer.exynos9610.so
+-vendor/lib/libExynosHWCService.so
+-vendor/lib/libGrallocWrapper.so
+-vendor/lib/libexynosdisplay.so
+-vendor/lib/libexynosgraphicbuffer.so
+-vendor/lib/libexynosscaler.so
+-vendor/lib/libexynosutils.so
+-vendor/lib/libexynosv4l2.so
+-vendor/lib/hw/hwcomposer.exynos9610.so
+-vendor/lib64/libExynosHWCService.so
+-vendor/lib64/libGrallocWrapper.so
+-vendor/lib64/libacryl.so
+-vendor/lib64/libacryl_plugin_slsi_hdr10.so
+-vendor/lib64/libexynosdisplay.so
+-vendor/lib64/libexynosgraphicbuffer.so
+-vendor/lib64/libexynosscaler.so
+-vendor/lib64/libexynosutils.so
+-vendor/lib64/libexynosv4l2.so
 
 ## Keymaster
-vendor/lib64/libkeymaster_helper.so
+-vendor/lib64/libkeymaster_helper.so
 -vendor/lib64/libskeymaster4device.so
-
-## Memtrack
-vendor/lib64/hw/memtrack.exynos9610.so
-vendor/lib/hw/memtrack.exynos9610.so
 
 ## Mobicore
 vendor/app/mcRegistry/00060308060501020000000000000000.tabin
