@@ -6,6 +6,11 @@
 /data/exynos(/.*)?			     u:object_r:exynos_data_file:s0
 /data/vendor/nfc(/.*)?                       u:object_r:nfc_vendor_data_file:s0
 
+# Apex
+/data/vendor/metadata_apex(/.*)?                                                                u:object_r:apex_metadata_file:s0
+/data/vendor/metadata_apex/sessions(/.*)?                                                       u:object_r:apex_metadata_file:s0
+
+
 ####################################
 # Block
 
