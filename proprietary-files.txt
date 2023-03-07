@@ -13,7 +13,6 @@ vendor/lib/lib_SoundAlive_SRC384_ver320.so
 vendor/lib/lib_soundaliveresampler.so
 vendor/lib/libaboxpcmdump.so
 vendor/lib/libalsautils_sec.so
-vendor/lib/libaudio_soundtrigger.so
 vendor/lib/libaudioproxy.so
 vendor/lib/libdatamod.so
 vendor/lib/libfloatingfeature.so
@@ -123,6 +122,7 @@ vendor/etc/init/vendor.samsung.hardware.gnss@2.0-service.rc
 ## HWC
 -vendor/lib64/hw/hwcomposer.exynos9610.so
 -vendor/lib/libExynosHWCService.so
+-vendor/lib/libexynosgscaler.so
 -vendor/lib/libGrallocWrapper.so
 vendor/lib/hw/gralloc.exynos9610.so
 -vendor/lib/libexynosdisplay.so
@@ -139,6 +139,7 @@ vendor/lib64/hw/gralloc.exynos9610.so
 -vendor/lib64/libexynosdisplay.so
 -vendor/lib64/libexynosgraphicbuffer.so
 -vendor/lib64/libexynosscaler.so
+-vendor/lib64/libexynosgscaler.so
 -vendor/lib64/libexynosutils.so
 -vendor/lib64/libexynosv4l2.so
 
