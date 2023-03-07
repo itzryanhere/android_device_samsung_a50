@@ -1,7 +1,6 @@
 git clone https://github.com/GiovanYCringe/samsung_a505f device/samsung/a505f;
 git clone https://github.com/TheN001/kernel-a50 kernel/samsung/a50;
-git clone https://github.com/TheN001/android_vendor_samsung_a50-common vendor/samsung/a50-common;
-git clone https://github.com/TheN001/vendor_samsung_a505f vendor/samsung/a505f;
+git clone https://github.com/GiovanYCringe/vendor_samsung vendor/samsung
 rm -rf hardware/samsung;
 git clone https://github.com/LineageOS/android_hardware_samsung hardware/samsung;
 git clone https://github.com/LineageOS/android_device_samsung_slsi_sepolicy device/samsung_slsi/sepolicy;
