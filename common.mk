@@ -238,8 +238,7 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb-service.samsung
-
+    android.hardware.usb@1.3-service.samsung
 
 # Lights
 PRODUCT_PACKAGES += \
