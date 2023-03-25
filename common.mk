@@ -19,8 +19,9 @@ COMMON_PATH := device/samsung/a50-common
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/a50-common/a50-common-vendor.mk)
 
-# Enable updating of APEXes
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+OVERRIDE_TARGET_FLATTEN_APEX := true
+DEXPREOPT_GENERATE_APEX_IMAGE := true
+ro.apex.updatable=false
 
 # Audio
 PRODUCT_PACKAGES += \
