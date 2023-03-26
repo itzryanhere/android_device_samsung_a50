@@ -1,4 +1,4 @@
-git clone https://github.com/GiovanYCringe/samsung_a505f device/samsung/a505f;
+git clone https://github.com/GiovanYCringe/device_samsung_a505f device/samsung/a505f;
 git clone https://github.com/TheN001/kernel-a50 kernel/samsung/a50;
 git clone https://github.com/GiovanYCringe/vendor_samsung vendor/samsung
 rm -rf hardware/samsung;
