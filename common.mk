@@ -18,6 +18,10 @@ COMMON_PATH := device/samsung/a50-common
 
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/a50-common/a50-common-vendor.mk)
+$(call inherit-product, $(COMMON_PATH)/debug-tools/debug.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+OVERRIDE_PRODUCT_COMPRESSED_APEX := false
 
 OVERRIDE_TARGET_FLATTEN_APEX := true
 DEXPREOPT_GENERATE_APEX_IMAGE := true
@@ -86,7 +90,8 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm-service.clearkey
+    android.hardware.drm@1.4-service.clearkey \
+    android.hardware.drm@1.3.vendor
 
 # FastCharge
 PRODUCT_PACKAGES += \

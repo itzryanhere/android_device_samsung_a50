@@ -109,6 +109,10 @@ vendor/firmware/pp_cfg.json
 vendor/lib/hw/gatekeeper.exynos9610.so
 vendor/lib64/hw/gatekeeper.exynos9610.so
 
+## Gralloc
+vendor/lib/hw/gralloc.exynos9610.so
+vendor/lib64/hw/gralloc.exynos9610.so
+
 ## GPS
 -vendor/bin/hw/vendor.samsung.hardware.gnss@2.0-service
 vendor/etc/init/vendor.samsung.hardware.gnss@2.0-service.rc
@@ -125,7 +129,6 @@ vendor/etc/init/vendor.samsung.hardware.gnss@2.0-service.rc
 -vendor/lib/libExynosHWCService.so
 -vendor/lib/libexynosgscaler.so
 -vendor/lib/libGrallocWrapper.so
-vendor/lib/hw/gralloc.exynos9610.so
 -vendor/lib/libexynosdisplay.so
 -vendor/lib/libexynosgraphicbuffer.so
 -vendor/lib/libexynosscaler.so
@@ -135,7 +138,6 @@ vendor/lib/hw/gralloc.exynos9610.so
 -vendor/lib64/libExynosHWCService.so
 -vendor/lib64/libGrallocWrapper.so
 -vendor/lib64/libacryl.so
-vendor/lib64/hw/gralloc.exynos9610.so
 -vendor/lib64/libacryl_plugin_slsi_hdr10.so
 -vendor/lib64/libexynosdisplay.so
 -vendor/lib64/libexynosgraphicbuffer.so

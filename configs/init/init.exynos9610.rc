@@ -9,20 +9,6 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /storage/sdcard 0000 root root
-    mkdir /storage/usb1 0000 root root
-    mkdir /storage/usb2 0000 root root
-    mkdir /mnt/media_rw/sdcard 0700 media_rw media_rw
-    mkdir /mnt/media_rw/usb1 0700 media_rw media_rw
-    mkdir /mnt/media_rw/usb2 0700 media_rw media_rw
-
-    export SECONDARY_STORAGE /storage/sdcard:/storage/usb1:/storage/usb2
-
-    # Support legacy paths
-    symlink /storage/sdcard /mnt/ext_sd
-    symlink /data/app /factory
-
     #Reactivation Lock
     symlink /dev/block/platform/13520000.ufs/by-name/steady /dev/block/steady
 
@@ -63,7 +49,6 @@ on init
 
     ## SCSC BT
     chown bluetooth bluetooth /sys/module/scsc_bt/parameters/bluetooth_address
-
 
     # add stune/hot
     mkdir /dev/stune/hot
@@ -114,6 +99,20 @@ on init
     chown system system /dev/cpuset/cgroup.procs
     chmod 0664 /dev/cpuset/tasks
 
+    # for power hal
+    chown system radio /dev/cluster0_freq_min
+    chown system radio /dev/cluster0_freq_max
+    chown system radio /dev/cluster1_freq_min
+    chown system radio /dev/cluster1_freq_max
+    chown system radio /dev/cpu_dma_latency
+    chown system radio /dev/stune/top-app/schedtune.boost
+    chmod 0664 /dev/cluster0_freq_min
+    chmod 0664 /dev/cluster0_freq_max
+    chmod 0664 /dev/cluster1_freq_min
+    chmod 0664 /dev/cluster1_freq_max
+    chmod 0664 /dev/cpu_dma_latency
+    chmod 0664 /dev/stune/top-app/schedtune.boost
+     
     #sensor
     chmod 0664 /dev/nanohub
     chmod 0664 /dev/nanohub_comms
@@ -154,13 +153,6 @@ on post-fs-data
     chmod 0644 /dev/freezer/frozen/freezer.state
     chmod 0644 /dev/freezer/thaw/tasks
     chmod 0644 /dev/freezer/thaw/cgroup.procs
-
-# Samsung Pay
-    mkdir /efs/pfw_data 0760 vendor_spay vendor_spay
-
-# MST/NFC Switch
-    chown vendor_spay system /dev/mst_ctrl
-    chmod 0660 /dev/mst_ctrl
 
 # OLAF setup
     mkdir /dev/freezer/olaf
@@ -209,6 +201,9 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
+# swap
+    swapon_all /vendor/etc/fstab.exynos9610 
+    
 # SensorHub Log folder
     mkdir /data/vendor/sensorhub/ 0771 root system
 
@@ -281,6 +276,10 @@ on post-fs-data
 
     chmod 0755 /sys/kernel/debug/tracing
     restorecon /sys/kernel/debug/tracing/trace_marker
+
+# MST/NFC Switch
+    chown system system /dev/mst_ctrl
+    chmod 0660 /dev/mst_ctrl
 
 # HWC data
     mkdir /data/vendor/log/hwc 0771 system graphics
@@ -507,12 +506,15 @@ on boot
     chmod 0660 /sys/class/sec/switch/uart_sel
     chown system system /sys/class/sec/switch/uart_sel
 
+on late-fs 
+    wait_for_prop hwservicemanager.ready true 
+    mount_all /vendor/etc/fstab.exynos9610 --late 
+
 on fs
-    mount_all /vendor/etc/fstab.exynos9610
+    mount_all /vendor/etc/fstab.exynos9610 --early
     # We need to seperate mounting SEC_EFS partition from fstab file due to GSI image loading case
     wait /dev/block/platform/13520000.ufs/by-name/sec_efs
     mount ext4 /dev/block/platform/13520000.ufs/by-name/sec_efs /efs nosuid nodev noatime noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic
-    setprop ro.crypto.fuse_sdcard true
 
     restorecon_recursive /mnt/vendor/efs
     restorecon_recursive /mnt/vendor/cpefs
@@ -678,8 +680,8 @@ on fs
     chown system radio /sys/class/sensors/sensor_dev/flush
 	
 # Permissions for  LSI NFC
-#    chmod 0660 /dev/sec-nfc
-#    chown nfc nfc /dev/sec-nfc
+    chmod 0660 /dev/sec-nfc
+    chown nfc nfc /dev/sec-nfc
 
 # Diag-daemon
     mkdir /efs/cpdebug 0771 radio system
@@ -692,8 +694,8 @@ on fs
     chown system system /dev/p3
 
 # Permissions for NXP NFC
-#    chmod 0660 /dev/pn547
-#    chown nfc nfc /dev/pn547
+    chmod 0660 /dev/pn547
+    chown nfc nfc /dev/pn547
 
 # Permissions for NXP ESE
     chmod 0660 /dev/p61
@@ -772,38 +774,11 @@ service argos-daemon /vendor/bin/argosd
     user system
     group system radio
 
-# faced
-service faced /system/bin/faced
-    class late_start
-    user system
-    group system
-
-service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard /storage/sdcard
-    class late_start
-    disabled
-service fuse_usb1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb1 /storage/usb1
-    class late_start
-    disabled
-service fuse_usb2 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb2 /storage/usb2
-    class late_start
-    disabled
-
-# disabled from system sw audio it will be enabled later
-# service abox /vendor/bin/main_abox 14a50000.abox /data/vendor/log/abox
-#    class late_start
-#    user audioserver
-#    group system
-
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /system/bin/watchdogd 10 20
      class core
      oneshot
      seclabel u:r:watchdogd:s0
-
-# on userdebug and eng builds, enable kgdb on the serial console
-on property:ro.debuggable=1
-    write /sys/module/kgdboc/parameters/kgdboc ttyFIQ1
-    write /sys/module/fiq_debugger/parameters/kgdb_enable 1
 
 on property:ro.bootmode=charger
     wait /dev/block/platform/13520000.ufs/by-name/sec_efs
@@ -816,68 +791,6 @@ on property:ro.bootmode=charger
     chmod 0660 /efs/usb_hw_param/usb_hw_param.log
     mkdir /efs/lpm 0775 system system
     class_start sec-charger
-
-# Sysscope
-service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13520000.ufs/by-name/param
-    class core
-    user root
-    group root
-    seclabel u:r:prepare_param:s0
-    oneshot
-
-service dhcpcd_wlan0 /vendor/bin/dhcpcd -aABDKL
-        class main
-        disabled
-        oneshot
-
-service iprenew_wlan0 /vendor/bin/dhcpcd -n
-        class main
-        disabled
-        oneshot
-
-service dhcpcd_p2p /vendor/bin/dhcpcd -aABKL
-        class main
-        disabled
-        oneshot
-
-service iprenew_p2p /vendor/bin/dhcpcd -n
-        class main
-        disabled
-        oneshot
-
-# SPE-1748: PANU DHCP Client not launched
-service dhcpcd_bt-pan /vendor/bin/dhcpcd -ABKL
-        class main
-        disabled
-        oneshot
-
-service iprenew_bt-pan /vendor/bin/dhcpcd -n
-        class main
-        disabled
-        oneshot
-
-# SSWAP
-service swapon /system/bin/sswap -s -z -f 2560
-    class core
-    user system
-    group system
-    capabilities SYS_ADMIN
-    seclabel u:r:sswap:s0
-    oneshot
-
-# Create carrier folder for HiddenMenu
-on post-fs
-     mkdir /efs/carrier 0755 radio system
-     chown radio system /efs/carrier
-     chown radio system /efs/carrier/HiddenMenu
-
-# SSU (Samsung SIM Unlock)
-on property:ro.boot.carrierid=VZW
-    setprop ssu.support 1
-
-# tracking activation VNG
-#on property:ro.csc.sales_code=XXV
-#   tracking_activation_VNG
 
 # sensorhub fw
 on post-fs
