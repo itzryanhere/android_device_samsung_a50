@@ -54,13 +54,8 @@ PRODUCT_PACKAGES += \
     SamsungDAP
 
 # BiometricFingeprint
-ifeq ($(TARGET_HAVE_FOD),true)
      android.hardware.biometrics.fingerprint@2.3-service-samsung.a50 \
      SamsungUdfpsHandler.a50
-else
-PRODUCT_PACKAGES += \
-     android.hardware.biometrics.fingerprint@2.3-service.samsung
-endif
 
 # Bluetooth
 PRODUCT_PACKAGES += \
