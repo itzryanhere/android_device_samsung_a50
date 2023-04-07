@@ -22,7 +22,6 @@
 #include <hardware/fingerprint.h>
 #include <hardware/hardware.h>
 #include "BiometricsFingerprint.h"
-#include "TimedRestore.h"
 #include <android-base/properties.h>
 #include <dlfcn.h>
 #include <fstream>
@@ -34,7 +33,7 @@
 #endif
 
 #define TSP_CMD_PATH "/sys/class/sec/tsp/cmd"
-#define B_PATH "/sys/class/backlight/panel/brightness"
+#define HBM_PATH "/sys/class/lcd/panel/mask_brightness"
 
 namespace android {
 namespace hardware {
@@ -46,8 +45,6 @@ namespace implementation {
 using RequestStatus = android::hardware::biometrics::fingerprint::V2_1::RequestStatus;
 
 BiometricsFingerprint* BiometricsFingerprint::sInstance = nullptr;
-
-std::shared_ptr<TimedRestore> BrightnessRestore = nullptr;
 
 template <typename T>
 static void set(const std::string& path, const T& value) {
@@ -117,12 +114,9 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
-    property_set("vendor.finger.down", "1");
-
-    std::thread([]() {
+    std::thread([this]() {
         std::this_thread::sleep_for(std::chrono::milliseconds(35));
-	BrightnessRestore = std::make_shared<TimedRestore>(B_PATH);
-	BrightnessRestore->set("331");
+        set(HBM_PATH, "331");
     }).detach();
 
     request(SEM_REQUEST_TOUCH_EVENT, FINGERPRINT_REQUEST_SESSION_OPEN);
@@ -133,7 +127,8 @@ Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, floa
 Return<void> BiometricsFingerprint::onFingerUp() {
     request(SEM_REQUEST_TOUCH_EVENT, FINGERPRINT_REQUEST_RESUME);
 
-    BrightnessRestore = nullptr;
+    set(HBM_PATH, "0");
+
     return Void();
 }
 
@@ -401,7 +396,7 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t* msg) {
                 100 - msg->data.enroll.samples_remaining;
 #endif
             if(msg->data.enroll.samples_remaining == 0) {
-                BrightnessRestore = nullptr;
+                set(HBM_PATH, "0");
 #ifdef CALL_CANCEL_ON_ENROLL_COMPLETION
                 thisPtr->ss_fingerprint_cancel();
 #endif
