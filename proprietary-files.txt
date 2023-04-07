@@ -189,9 +189,9 @@ vendor/lib64/omx/libOMX.Exynos.WMV.Decoder.so
 vendor/firmware/fimc_is_lib.bin
 vendor/firmware/fimc_is_rta.bin
 
-# RIL - from gta4xl
--vendor/lib/libaudio-ril.so|06c36739ae3ee1af5d8b1aae1fa396e91deee068
--vendor/lib/libsecril-client.so;MODULE=libsecril-client.exynos9610|f9fb21cfc35b5ed3500faa7b989b870a1c4d45f6
+## RIL
+vendor/lib/libaudio-ril.so
+vendor/lib/libsecril-client.so
 
 ## SECNATIVE
 vendor/lib/libsecnativefeature.so
