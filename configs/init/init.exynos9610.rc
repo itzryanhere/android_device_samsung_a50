@@ -155,6 +155,10 @@ on post-fs-data
     chmod 0644 /dev/freezer/thaw/tasks
     chmod 0644 /dev/freezer/thaw/cgroup.procs
 
+# MST/NFC Switch
+    chown vendor_spay system /dev/mst_ctrl
+    chmod 0660 /dev/mst_ctrl
+
 # OLAF setup
     mkdir /dev/freezer/olaf
     write /dev/freezer/olaf/freezer.state THAWED
@@ -298,6 +302,13 @@ on post-fs-data
     chmod 0664 /mnt/vendor/efs/wifi/.mac.cob
 
     #write /sys/module/scsc_mx/parameters/disable_recovery_handling 0
+
+# Samsung Pay
+#    mkdir /efs/pfw_data 0760 vendor_spay vendor_spay
+
+# MST/NFC Switch
+#    chown vendor_spay system /dev/mst_ctrl
+#    chmod 0660 /dev/mst_ctrl
 
 on boot
 # SDHMS Slowdown : Cpuset
