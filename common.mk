@@ -18,14 +18,6 @@ COMMON_PATH := device/samsung/a50-common
 
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/a50-common/a50-common-vendor.mk)
-$(call inherit-product, $(COMMON_PATH)/debug-tools/debug.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
-OVERRIDE_PRODUCT_COMPRESSED_APEX := false
-
-OVERRIDE_TARGET_FLATTEN_APEX := true
-DEXPREOPT_GENERATE_APEX_IMAGE := true
-ro.apex.updatable=false
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -83,15 +75,15 @@ PRODUCT_PACKAGES += \
 
 # Display
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.4-service \
+    android.hardware.graphics.composer@2.2-service \
     android.hardware.graphics.mapper@2.0-impl-2.1
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.4-service.clearkey \
-    android.hardware.drm@1.3.vendor
+    android.hardware.drm@1.4.vendor:32 \
+    android.hardware.drm-service.clearkey
 
 # FastCharge
 PRODUCT_PACKAGES += \

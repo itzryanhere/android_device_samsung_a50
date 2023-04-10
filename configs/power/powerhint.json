@@ -101,10 +101,6 @@
             "Node": "DoubleTapToWakeEnable",
             "Duration": 0,
             "Value": "aot_enable,1"
-<<<<<<< HEAD
-        },
-=======
         }
->>>>>>> 8923f7c (gta4xl-common: remove lineage perf profiles from powerhint)
     ]
 }
