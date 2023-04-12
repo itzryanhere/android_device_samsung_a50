@@ -250,6 +250,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.light-service.samsung
 
+# Samsung AIDL Support
+PRODUCT_PACKAGES += \
+    aidl-support
+
+# Samsung FMRadio impl
+PRODUCT_PACKAGES += \
+    FMRadio
+
+# SamsungParts
+PRODUCT_PACKAGES += \
+    SamsungParts
+
 # VNDK
 PRODUCT_PACKAGES += \
     libutils-v32
