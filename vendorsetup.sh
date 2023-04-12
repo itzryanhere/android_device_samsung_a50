@@ -6,4 +6,4 @@ git clone https://github.com/LineageOS/android_hardware_samsung hardware/samsung
 git clone https://github.com/LineageOS/android_hardware_samsung_slsi_libbt hardware/samsung_slsi/libbt;
 git clone https://github.com/LineageOS/android_hardware_samsung_slsi_scsc_wifibt_wifi_hal hardware/samsung_slsi/scsc_wifibt/wifi_hal;
 git clone https://github.com/LineageOS/android_hardware_samsung_slsi_scsc_wifibt_wpa_supplicant_lib hardware/samsung_slsi/scsc_wifibt/wpa_supplicant_lib;
-git clone --depth=1 https://gitlab.com/ThankYouMario/android_prebuilts_clang-standalone prebuilts/clang/host/Linux-x86/clang-standalone
+git clone https://github.com/moto-common/platform_prebuilts_clang_host_linux-x86_clang-r383902  prebuilts/clang/host/Linux-x86/r383902
