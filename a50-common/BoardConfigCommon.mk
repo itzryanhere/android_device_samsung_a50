@@ -99,6 +99,10 @@ TARGET_KERNEL_ADDITIONAL_FLAGS := \
 ## Keymaster
 TARGET_KEYMASTER_VARIANT := samsung
 
+# libinit
+TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):init_a50
+TARGET_RECOVERY_DEVICE_MODULES := libinit_a50
+
 ## Manifest
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(COMMON_PATH)/device_framework_matrix.xml \
