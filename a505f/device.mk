@@ -17,9 +17,6 @@
 # Inherit from the common tree
 $(call inherit-product, device/samsung/a50-common/common.mk)
 
-# Inherit proprietary files
-$(call inherit-product, vendor/samsung/a505f/a505f-vendor.mk)
-
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
@@ -34,3 +31,6 @@ PRODUCT_COPY_FILES += \
 # RIL
 PRODUCT_PACKAGES += \
     secril_config_svc
+
+# Inherit proprietary files
+$(call inherit-product, vendor/samsung/a505f/a505f-vendor.mk)
