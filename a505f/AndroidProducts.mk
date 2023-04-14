@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020-2021 The LineageOS Project
+# Copyright (C) 2020 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,19 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-## Inherit from the common tree
-include device/samsung/a50-common/BoardConfigCommon.mk
+PRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/lineage_a505f.mk
 
-## Inherit from the proprietary configuration
-include vendor/samsung/a505f/BoardConfigVendor.mk
-
-DEVICE_PATH := device/samsung/a505f
-
-TARGET_OTA_ASSERT_DEVICE := a505f,a50,a50dd
-
-## APEX image
-DEXPREOPT_GENERATE_APEX_IMAGE := true
-
-## Properties
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
+COMMON_LUNCH_CHOICES := \
+    lineage_a505f-eng \
+    lineage_a505f-user \
+    lineage_a505f-userdebug

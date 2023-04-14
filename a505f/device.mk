@@ -32,5 +32,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     secril_config_svc
 
+# Init.rc
+PRODUCT_PACKAGES += \
+    fingerprint_common.rc
+
 # Inherit proprietary files
 $(call inherit-product, vendor/samsung/a505f/a505f-vendor.mk)
