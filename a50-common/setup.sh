@@ -3,7 +3,6 @@ BASE="device/samsung"
 UNI="${BASE}/a50-common"
 DEV="${BASE}/${DEVICE}"
 
-fi
 VENDOR=$(cat ${UNI}/vendor_name)
 if [ ! $VENDOR ]; then
 	VENDOR=aosp
