@@ -95,6 +95,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.fastcharge@1.0-service.samsung
 
+# Biometric Fingerprint
+PRODUCT_PACKAGES += \
+     android.hardware.biometrics.fingerprint@2.3-service-samsung.a50 \
+     SamsungUdfpsHandler.a50
+
 # Gatekeeper
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl:64 \
