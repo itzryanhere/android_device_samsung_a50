@@ -14,29 +14,25 @@
 # limitations under the License.
 #
 
-COMMON_PATH := device/samsung/a50-common
+COMMON_PATH := device/samsung/universal9610-common
 
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/samsung/a50-common/a50-common-vendor.mk)
+$(call inherit-product, vendor/samsung/universal9610-common/universal9610-common-vendor.mk)
 
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl:32 \
     android.hardware.audio@7.1-impl:32 \
     android.hardware.audio.service \
+    android.hardware.soundtrigger@2.0-impl:32 \
     android.hardware.bluetooth.audio-impl \
+    android.hidl.allocator@1.0.vendor:32 \
     audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
     libaudioroute \
     libtinyalsa \
     libtinycompress
-
-# Audio-Legacy for Muting logspam
-PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@4.0-impl \
-    android.hardware.audio@2.0-service
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration_7_0.xml \
@@ -51,9 +47,9 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(COMMON_PATH)/configs/audio/mixer_gains.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_gains.xml
 
-# DAP
+# Biometric Fingerprint
 PRODUCT_PACKAGES += \
-    SamsungDAP
+    vendor.samsung.hardware.biometrics.fingerprint@3.0-service.a50
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -62,7 +58,7 @@ PRODUCT_PACKAGES += \
     libbt-vendor:64
 
 PRODUCT_COPY_FILES += \
-    hardware/samsung_slsi/libbt/conf/bt_did.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bt_did.conf \
+   hardware/samsung_slsi/libbt/conf/bt_did.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bt_did.conf \
     hardware/samsung_slsi/libbt/conf/bt_vendor.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bt_vendor.conf \
     $(COMMON_PATH)/configs/sysconfig/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
 
@@ -70,20 +66,25 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.5-service_64 \
     libsensorndkbridge \
+    GCameraGoPrebuilt
+
+# Charger
+PRODUCT_PACKAGES += \
+    charger_res_images_vendor
 
 # ConfigStore
 PRODUCT_PACKAGES += \
     disable_configstore
 
-# Charger
+# DAP
 PRODUCT_PACKAGES += \
-     charger_res_images_vendor
+    SamsungDAP
 
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.2-service \
+    android.hardware.graphics.composer@2.4-service \
     android.hardware.graphics.mapper@2.0-impl-2.1
 
 # DRM
@@ -95,11 +96,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.fastcharge@1.0-service.samsung
 
-# Biometric Fingerprint
-PRODUCT_PACKAGES += \
-     android.hardware.biometrics.fingerprint@2.3-service-samsung.a50 \
-     SamsungUdfpsHandler.a50
-
 # Gatekeeper
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl:64 \
@@ -107,7 +103,7 @@ PRODUCT_PACKAGES += \
 
 # GPS/GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.1.vendor:64
+    android.hardware.gnss@2.1.vendor
 
 # Graphics
 # Device uses high-density artwork where available
@@ -135,7 +131,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/init/init.exynos9610.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.exynos9610.usb.rc \
     $(COMMON_PATH)/configs/init/init.recovery.exynos9610.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.exynos9610.rc \
     $(COMMON_PATH)/configs/init/init.samsung.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.samsung.rc \
-    $(COMMON_PATH)/configs/init/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
+    $(COMMON_PATH)/configs/init/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -146,6 +142,14 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.0-service.samsung \
     libkeymaster4_1support.vendor:64
 
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light-service.samsung
+
+# Livedisplay
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@2.0-service.samsung-exynos
+
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
@@ -154,7 +158,8 @@ PRODUCT_COPY_FILES += \
 
 # Memtrack
 PRODUCT_PACKAGES += \
-    android.hardware.memtrack-service.samsung-mali
+    android.hardware.memtrack@1.0-impl:64 \
+    android.hardware.memtrack@1.0-service
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
@@ -214,15 +219,14 @@ PRODUCT_COPY_FILES += \
 
 # Ril
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.4.vendor:64 \
-    android.hardware.radio.config@1.2.vendor:64 \
-    android.hardware.radio.deprecated@1.0.vendor:64 \
+    android.hardware.radio@1.4.vendor \
+    android.hardware.radio.config@1.2.vendor \
+    android.hardware.radio.deprecated@1.0.vendor \
     secril_config_svc
 
 # Sensors
 PRODUCT_PACKAGES += \
-  android.hardware.contexthub@1.0.vendor:64 \
-  android.hardware.sensors-service.samsung-multihal
+    android.hardware.sensors-service.samsung-multihal
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -233,7 +237,6 @@ PRODUCT_SOONG_NAMESPACES += \
     $(COMMON_PATH) \
     hardware/google/interfaces \
     hardware/google/pixel \
-    hardware/samsung \
     hardware/samsung/aidl/power-libperfmgr
 
 # Thermal
@@ -251,26 +254,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.usb-service.samsung
 
-# Lights
+# Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.light-service.samsung
-
-# Samsung AIDL Support
-PRODUCT_PACKAGES += \
-    aidl-support
-
-# Samsung FMRadio impl
-PRODUCT_PACKAGES += \
-    FMRadio
-
-# SamsungParts
-PRODUCT_PACKAGES += \
-    SamsungParts
-
-# VNDK
-PRODUCT_PACKAGES += \
-    libutils-v32
-
+    android.hardware.vibrator-service.samsung
+    
 # WiFi
 PRODUCT_PACKAGES += \
     WifiOverlay \

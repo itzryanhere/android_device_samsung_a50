@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#define LOG_TAG "vendor.samsung.hardware.biometrics.fingerprint@3.0-service.a50"
 
 #include <android-base/logging.h>
 #include <hidl/HidlTransportSupport.h>
@@ -24,14 +25,14 @@
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 
-using android::hardware::biometrics::fingerprint::V2_3::IBiometricsFingerprint;
-using android::hardware::biometrics::fingerprint::V2_3::implementation::BiometricsFingerprint;
+using vendor::samsung::hardware::biometrics::fingerprint::V3_0::ISehBiometricsFingerprint;
+using vendor::samsung::hardware::biometrics::fingerprint::V3_0::implementation::SehBiometricsFingerprint;
 
 using android::OK;
 using android::sp;
 
 int main() {
-    android::sp<IBiometricsFingerprint> bio = BiometricsFingerprint::getInstance();
+    android::sp<ISehBiometricsFingerprint> bio = SehBiometricsFingerprint::getInstance();
 
     configureRpcThreadpool(1, true);
 
