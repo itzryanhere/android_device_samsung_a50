@@ -14,10 +14,7 @@
 # limitations under the License.
 #
 
-COMMON_PATH := device/samsung/universal9610-common
-
-# Get non-open-source specific aspects
-$(call inherit-product, vendor/samsung/universal9610-common/universal9610-common-vendor.mk)
+COMMON_PATH := device/samsung/a50-common
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -269,3 +266,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(COMMON_PATH)/configs/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
     $(COMMON_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
+
+# Get non-open-source specific aspects
+$(call inherit-product, vendor/samsung/a50-common/a50-common-vendor.mk)
